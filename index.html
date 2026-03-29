@@ -3,753 +3,675 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Design Cram Sheet</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>Web Design Cram Sheet — By Objectives</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface2: #1a1a26;
-    --border: #2a2a40;
-    --accent1: #7c3aed;
-    --accent2: #06b6d4;
-    --accent3: #f59e0b;
-    --accent4: #10b981;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --highlight: #fbbf24;
+    --paper: #faf7f2;
+    --ink: #1a1612;
+    --muted: #6b6560;
+    --rule: #d9d3cb;
+    --c1: #c0392b;   /* ch1 red */
+    --c2: #1a6b8a;   /* ch2 teal */
+    --c3: #7b4f12;   /* ch3 amber */
+    --c4: #2d6a4f;   /* ch4 green */
+    --c1l: #fdf0ee;
+    --c2l: #eef5f8;
+    --c3l: #fdf5e6;
+    --c4l: #eef5f1;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--bg);
-    color: var(--text);
+    background: #e8e4dd;
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
+    color: var(--ink);
+    padding: 18px;
     line-height: 1.5;
-    padding: 20px;
   }
 
-  /* Header */
-  .header {
-    text-align: center;
-    margin-bottom: 24px;
-    padding: 20px;
-    background: linear-gradient(135deg, #1a0533 0%, #0c1a3a 50%, #001a1a 100%);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    position: relative;
-    overflow: hidden;
+  .page {
+    background: var(--paper);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    border: 1px solid var(--rule);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
   }
-  .header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 20px,
-      rgba(124,58,237,0.03) 20px,
-      rgba(124,58,237,0.03) 40px
-    );
+
+  /* HEADER */
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 2.5px solid var(--ink);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
   }
-  .header h1 {
-    font-family: 'Space Mono', monospace;
-    font-size: 22px;
-    font-weight: 700;
+  .masthead h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
     letter-spacing: -0.5px;
-    background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
   }
-  .header p {
+  .masthead .sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
     color: var(--muted);
-    font-size: 11px;
-    margin-top: 4px;
-    font-family: 'Space Mono', monospace;
-    position: relative;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
   }
 
-  /* Grid layout */
-  .grid {
+  /* CHAPTER COLUMNS */
+  .chapters {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
   }
 
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
+  .ch {
+    border-top: 3px solid;
+    padding-top: 10px;
   }
+  .ch1 { border-color: var(--c1); }
+  .ch2 { border-color: var(--c2); }
+  .ch3 { border-color: var(--c3); }
+  .ch4 { border-color: var(--c4); }
 
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .ch1 .card-header { background: linear-gradient(90deg, rgba(124,58,237,0.25), transparent); border-left: 3px solid var(--accent1); }
-  .ch2 .card-header { background: linear-gradient(90deg, rgba(6,182,212,0.25), transparent); border-left: 3px solid var(--accent2); }
-  .ch3 .card-header { background: linear-gradient(90deg, rgba(245,158,11,0.25), transparent); border-left: 3px solid var(--accent3); }
-  .ch4 .card-header { background: linear-gradient(90deg, rgba(16,185,129,0.25), transparent); border-left: 3px solid var(--accent4); }
-
-  .ch-badge {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 4px;
-    letter-spacing: 1px;
+  .ch-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
+    margin-bottom: 2px;
   }
-  .ch1 .ch-badge { background: rgba(124,58,237,0.3); color: #a78bfa; }
-  .ch2 .ch-badge { background: rgba(6,182,212,0.3); color: #67e8f9; }
-  .ch3 .ch-badge { background: rgba(245,158,11,0.3); color: #fcd34d; }
-  .ch4 .ch-badge { background: rgba(16,185,129,0.3); color: #6ee7b7; }
+  .ch1 .ch-label { color: var(--c1); }
+  .ch2 .ch-label { color: var(--c2); }
+  .ch3 .ch-label { color: var(--c3); }
+  .ch4 .ch-label { color: var(--c4); }
 
-  .card-header h2 {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
+  .ch-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 15px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--ink);
   }
 
-  .card-body { padding: 12px 14px; }
-
-  /* Sections within card */
-  .section {
+  /* OBJECTIVE BLOCK */
+  .obj-block {
     margin-bottom: 11px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
   }
-  .section:last-child { margin-bottom: 0; }
 
-  .section-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--muted);
-    margin-bottom: 5px;
+  .obj-head {
     display: flex;
     align-items: center;
-    gap: 5px;
-  }
-  .section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* Term/definition rows */
-  .term-row {
-    display: flex;
     gap: 6px;
-    margin-bottom: 4px;
-    align-items: flex-start;
-  }
-  .term {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
+    padding: 5px 8px;
+    font-size: 9.5px;
     font-weight: 700;
-    color: var(--highlight);
-    white-space: nowrap;
-    min-width: 90px;
-    padding-top: 1px;
+    letter-spacing: 0.2px;
+    line-height: 1.3;
   }
-  .def {
-    font-size: 11px;
-    color: #cbd5e1;
-    line-height: 1.45;
+  .ch1 .obj-head { background: var(--c1l); color: var(--c1); border-bottom: 1px solid #f0c0bb; }
+  .ch2 .obj-head { background: var(--c2l); color: var(--c2); border-bottom: 1px solid #b8d8e8; }
+  .ch3 .obj-head { background: var(--c3l); color: var(--c3); border-bottom: 1px solid #ecd8b0; }
+  .ch4 .obj-head { background: var(--c4l); color: var(--c4); border-bottom: 1px solid #aad4bc; }
+
+  .obj-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    font-weight: 500;
+    opacity: 0.7;
+    flex-shrink: 0;
   }
 
-  /* Tag list */
-  .tag-grid {
+  .obj-body {
+    padding: 6px 8px;
+    background: white;
+  }
+
+  /* Content elements */
+  .fact {
+    font-size: 11px;
+    color: #2a2520;
+    padding: 2px 0 2px 10px;
+    border-left: 2px solid var(--rule);
+    margin-bottom: 3px;
+    line-height: 1.4;
+  }
+  .fact:last-child { margin-bottom: 0; }
+  .fact strong { color: var(--ink); }
+
+  .code {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    background: #f4f1ec;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 5px 7px;
+    margin: 4px 0;
+    line-height: 1.7;
+    color: #2a2520;
+  }
+  .code .kw { color: var(--c1); }
+  .code .val { color: var(--c4); }
+  .code .cm { color: #9a9490; }
+  .code .tag { color: var(--c2); }
+
+  .pill-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-    margin-bottom: 5px;
+    gap: 3px;
+    margin-top: 3px;
   }
-  .tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 9.5px;
-    padding: 2px 7px;
-    border-radius: 4px;
+  .pill {
+    font-size: 9px;
+    font-family: 'DM Mono', monospace;
+    padding: 1px 6px;
+    border-radius: 3px;
     border: 1px solid;
-  }
-  .tag.purple { background: rgba(124,58,237,0.12); border-color: rgba(124,58,237,0.4); color: #c4b5fd; }
-  .tag.cyan { background: rgba(6,182,212,0.12); border-color: rgba(6,182,212,0.4); color: #a5f3fc; }
-  .tag.amber { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.4); color: #fde68a; }
-  .tag.green { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.4); color: #a7f3d0; }
-  .tag.red { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
-
-  /* Code block */
-  .code-block {
-    background: #0d0d18;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 8px 10px;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: #a5f3fc;
-    margin-bottom: 6px;
-    line-height: 1.7;
-  }
-  .code-block .kw { color: #c084fc; }
-  .code-block .str { color: #86efac; }
-  .code-block .cm { color: #475569; }
-
-  /* Process steps */
-  .steps {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .step {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .step-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    font-weight: 700;
-    min-width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .amber-num { background: rgba(245,158,11,0.2); color: #fcd34d; }
-  .step-text { font-size: 11px; color: #cbd5e1; line-height: 1.4; }
-  .step-text strong { color: var(--text); }
-
-  /* Comparison table */
-  .compare-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 10.5px;
-  }
-  .compare-table th {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    padding: 4px 8px;
-    background: var(--surface2);
-    color: var(--muted);
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-  }
-  .compare-table td {
-    padding: 4px 8px;
-    border-bottom: 1px solid rgba(42,42,64,0.5);
-    color: #cbd5e1;
-    vertical-align: top;
-  }
-  .compare-table tr:last-child td { border-bottom: none; }
-  .compare-table .label-col {
-    font-family: 'Space Mono', monospace;
-    font-size: 9.5px;
-    color: var(--highlight);
     white-space: nowrap;
   }
+  .ch1 .pill { border-color: #e8a09a; color: var(--c1); background: var(--c1l); }
+  .ch2 .pill { border-color: #8fc4d8; color: var(--c2); background: var(--c2l); }
+  .ch3 .pill { border-color: #e0c080; color: var(--c3); background: var(--c3l); }
+  .ch4 .pill { border-color: #80c8a0; color: var(--c4); background: var(--c4l); }
 
-  /* Highlight box */
-  .highlight-box {
-    border-radius: 6px;
-    padding: 7px 10px;
-    font-size: 11px;
-    margin-bottom: 6px;
+  .kv { display: flex; gap: 5px; margin-bottom: 3px; align-items: flex-start; }
+  .kv-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    white-space: nowrap;
+    padding-top: 1px;
+    min-width: 60px;
+    flex-shrink: 0;
   }
-  .hb-purple { background: rgba(124,58,237,0.1); border-left: 3px solid var(--accent1); color: #ddd6fe; }
-  .hb-cyan { background: rgba(6,182,212,0.1); border-left: 3px solid var(--accent2); color: #cffafe; }
-  .hb-amber { background: rgba(245,158,11,0.1); border-left: 3px solid var(--accent3); color: #fef3c7; }
-  .hb-green { background: rgba(16,185,129,0.1); border-left: 3px solid var(--accent4); color: #d1fae5; }
+  .ch1 .kv-key { color: var(--c1); }
+  .ch2 .kv-key { color: var(--c2); }
+  .ch3 .kv-key { color: var(--c3); }
+  .ch4 .kv-key { color: var(--c4); }
+  .kv-val { font-size: 10.5px; color: #2a2520; line-height: 1.4; }
 
-  /* Inline highlight */
-  .hl { color: var(--highlight); font-weight: 600; }
-  .hl-cyan { color: #67e8f9; font-weight: 600; }
-  .hl-green { color: #6ee7b7; font-weight: 600; }
-  .hl-purple { color: #c4b5fd; font-weight: 600; }
-
-  /* Two-col mini layout */
-  .mini-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  /* Bullet list */
-  ul.cram {
-    list-style: none;
-    padding: 0;
-  }
-  ul.cram li {
-    font-size: 11px;
-    color: #cbd5e1;
-    padding: 2px 0 2px 14px;
-    position: relative;
-    line-height: 1.45;
-  }
-  ul.cram li::before {
-    content: '›';
-    position: absolute;
-    left: 2px;
+  .mini-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+  .mini-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 3px 5px;
+    background: #f0ece6;
     color: var(--muted);
+    text-align: left;
+    border-bottom: 1px solid var(--rule);
   }
+  .mini-table td {
+    padding: 3px 5px;
+    border-bottom: 1px solid #f0ece6;
+    color: #2a2520;
+    vertical-align: top;
+  }
+  .mini-table tr:last-child td { border-bottom: none; }
+  .mini-table .tc { font-family: 'DM Mono', monospace; font-size: 9px; }
+
+  .rule-divider {
+    border: none;
+    border-top: 1px dashed var(--rule);
+    margin: 5px 0;
+  }
+
+  .note {
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 3px;
+  }
+
+  .steps-list { list-style: none; padding: 0; }
+  .steps-list li {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 3px;
+    font-size: 10.5px;
+    color: #2a2520;
+    line-height: 1.4;
+  }
+  .step-n {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    min-width: 14px;
+    padding-top: 1px;
+  }
+  .ch3 .step-n { color: var(--c3); }
 
   /* Footer */
   .footer {
-    text-align: center;
     margin-top: 16px;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: #334155;
-    letter-spacing: 1px;
+    padding-top: 8px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.8px;
     text-transform: uppercase;
-  }
-
-  @media print {
-    body { background: white; color: black; padding: 10px; font-size: 11px; }
-    .card { border: 1px solid #ccc; break-inside: avoid; }
-    .header { background: #f0f0f0 !important; color: black; }
   }
 </style>
 </head>
 <body>
+<div class="page">
 
-<div class="header">
-  <h1>⚡ Principles of Web Design — Cram Sheet</h1>
-  <p>Chapters 1–4 &nbsp;|&nbsp; 6th Edition &nbsp;|&nbsp; HTML5 · Design · Planning · CSS</p>
-</div>
-
-<div class="grid">
-
-  <!-- ===== CHAPTER 1 ===== -->
-  <div class="card ch1">
-    <div class="card-header">
-      <span class="ch-badge">CH 01</span>
-      <h2>HTML5 — Structure of the Web</h2>
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <h1>Principles of Web Design &mdash; Cram Sheet</h1>
+    <div>
+      <div class="sub">6th Edition &nbsp;·&nbsp; Chapters 1–4</div>
+      <div class="sub" style="margin-top:2px;">Structured by Chapter Objectives</div>
     </div>
-    <div class="card-body">
+  </div>
 
-      <div class="section">
-        <div class="section-title">Core Concept</div>
-        <div class="highlight-box hb-purple">
-          HTML is a <span class="hl-purple">markup language</span> that identifies and structures sections of a web page using <strong>elements</strong> (tags). CSS then styles that structure.
+  <div class="chapters">
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER 1 — HTML5
+    ══════════════════════════════════════════ -->
+    <div class="ch ch1">
+      <div class="ch-label">Chapter 1</div>
+      <div class="ch-title">HTML5</div>
+
+      <!-- OBJ 1: Create web pages with HTML -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 1</span> Create Web Pages with HTML</div>
+        <div class="obj-body">
+          <div class="fact">HTML is a <strong>markup language</strong> that identifies sections of a web page using elements (tags)</div>
+          <div class="code">
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+  <span class="tag">&lt;head&gt;</span><span class="tag">&lt;title&gt;</span>Title<span class="tag">&lt;/title&gt;&lt;/head&gt;</span>
+  <span class="tag">&lt;body&gt;</span> visible content <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+          </div>
+          <div class="kv"><span class="kv-key">&lt;head&gt;</span><span class="kv-val">Descriptive info — not shown in browser</span></div>
+          <div class="kv"><span class="kv-key">&lt;body&gt;</span><span class="kv-val">All visible content the user sees</span></div>
+          <div class="kv"><span class="kv-key">Doctype</span><span class="kv-val">Declares document rules/version</span></div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Syntax Rules</div>
-        <div class="code-block">
-<span class="cm">&lt;!-- Paired element --&gt;</span>
-<span class="kw">&lt;h1&gt;</span>This is a heading<span class="kw">&lt;/h1&gt;</span>
-
-<span class="cm">&lt;!-- Void element (no closing tag) --&gt;</span>
-<span class="kw">&lt;br&gt;</span>  <span class="kw">&lt;img src=</span><span class="str">"img.jpg"</span><span class="kw">&gt;</span>
-
-<span class="cm">&lt;!-- Attribute syntax --&gt;</span>
-<span class="kw">&lt;h1 id=</span><span class="str">"title"</span><span class="kw">&gt;</span>Main Title<span class="kw">&lt;/h1&gt;</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Basic Page Structure</div>
-        <div class="code-block">
-<span class="kw">&lt;!DOCTYPE html&gt;</span>         <span class="cm">&lt;!-- doctype --&gt;</span>
-<span class="kw">&lt;html&gt;</span>                   <span class="cm">&lt;!-- root element --&gt;</span>
-  <span class="kw">&lt;head&gt;</span>               <span class="cm">&lt;!-- meta info --&gt;</span>
-    <span class="kw">&lt;title&gt;</span>Page<span class="kw">&lt;/title&gt;</span>
-  <span class="kw">&lt;/head&gt;</span>
-  <span class="kw">&lt;body&gt;</span>               <span class="cm">&lt;!-- visible content --&gt;</span>
-  <span class="kw">&lt;/body&gt;</span>
-<span class="kw">&lt;/html&gt;</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Key Terms</div>
-        <div class="term-row"><span class="term">Element</span><span class="def">A pair of HTML tags + their content</span></div>
-        <div class="term-row"><span class="term">Void Element</span><span class="def">Single tag; inserts content (e.g. &lt;br&gt;, &lt;img&gt;)</span></div>
-        <div class="term-row"><span class="term">Attribute</span><span class="def">Extra info inside a tag (e.g. id, href, src)</span></div>
-        <div class="term-row"><span class="term">Doctype</span><span class="def">Declares the HTML version/rules for the doc</span></div>
-        <div class="term-row"><span class="term">Rendering Engine</span><span class="def">Browser component that interprets HTML/CSS</span></div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">CSS Basics</div>
-        <div class="code-block">
+      <!-- OBJ 2: Add style with CSS -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 2</span> Add Style with CSS</div>
+        <div class="obj-body">
+          <div class="fact">CSS separates <strong>presentation</strong> from content — controls fonts, colors, spacing</div>
+          <div class="code">
 <span class="cm">/* selector { property: value; } */</span>
-<span class="kw">p</span> { <span class="str">color</span>: blue; <span class="str">font-size</span>: 16px; }
-<span class="kw">h1</span> { <span class="str">border-bottom</span>: 2px solid red; }
-        </div>
-        <div class="term-row"><span class="term">Selector</span><span class="def">Targets which element to style</span></div>
-        <div class="term-row"><span class="term">Declaration</span><span class="def">property + value pair inside { }</span></div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">History Milestones</div>
-        <div class="term-row"><span class="term">1989</span><span class="def">Tim Berners-Lee proposes HTML at CERN</span></div>
-        <div class="term-row"><span class="term">1994</span><span class="def">W3C founded at MIT to set web standards</span></div>
-        <div class="term-row"><span class="term">HTML5</span><span class="def">Latest major version; improves media & semantics</span></div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ===== CHAPTER 2 ===== -->
-  <div class="card ch2">
-    <div class="card-header">
-      <span class="ch-badge">CH 02</span>
-      <h2>Web Design Principles</h2>
-    </div>
-    <div class="card-body">
-
-      <div class="section">
-        <div class="section-title">Core Concept</div>
-        <div class="highlight-box hb-cyan">
-          Web pages appear differently across browsers, devices & screen sizes. Designers must plan for <span class="hl-cyan">every variable</span> they cannot control.
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Variables You CANNOT Control</div>
-        <div class="tag-grid">
-          <span class="tag cyan">Browser type</span>
-          <span class="tag cyan">Screen resolution</span>
-          <span class="tag cyan">Connection speed</span>
-          <span class="tag cyan">Device type</span>
-          <span class="tag cyan">OS / fonts</span>
-          <span class="tag cyan">Browser version</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Browser Compatibility Guidelines</div>
-        <ul class="cram">
-          <li>Follow <span class="hl">W3C standards</span> — ensures cross-browser consistency</li>
-          <li><span class="hl">Validate</span> your HTML and CSS code</li>
-          <li>Test in both <span class="hl">old and new</span> browser versions</li>
-          <li>Know your audience's preferred browser</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Screen Resolution & Layout Types</div>
-        <table class="compare-table">
-          <tr><th>Type</th><th>Behavior</th><th>When to Use</th></tr>
-          <tr>
-            <td class="label-col">Flexible</td>
-            <td>Stretches/shrinks with screen</td>
-            <td>Modern, responsive sites</td>
-          </tr>
-          <tr>
-            <td class="label-col">Fixed</td>
-            <td>Set width, stays centered</td>
-            <td>Predictable layouts</td>
-          </tr>
-        </table>
-        <div style="margin-top:5px; font-size:10.5px; color:var(--muted);">Common resolutions: <span class="hl-cyan">1024×768</span> and <span class="hl-cyan">1366×768</span></div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Look & Feel</div>
-        <div class="term-row"><span class="term">Look</span><span class="def">Colors, fonts, layout, imagery — the visual design</span></div>
-        <div class="term-row"><span class="term">Feel</span><span class="def">Navigation, interactions, responsiveness — the UX</span></div>
-        <div class="term-row"><span class="term">Unified Design</span><span class="def">Consistent style & brand across all pages</span></div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Accessibility Features</div>
-        <div class="term-row"><span class="term">Color Contrast</span><span class="def">Min 4.5:1 ratio (WCAG) for readable text</span></div>
-        <div class="term-row"><span class="term">Keyboard Nav</span><span class="def">All actions operable without a mouse</span></div>
-        <div class="term-row"><span class="term">Alt Text</span><span class="def">Image descriptions for screen readers</span></div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Browser Cache</div>
-        <div class="highlight-box hb-cyan">
-          On repeat visits, browsers load files from local <strong>cache</strong> (faster). <span class="hl-cyan">Reuse graphics</span> across pages to maximize this benefit.
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Mobile Design</div>
-        <ul class="cram">
-          <li>Use <span class="hl">CSS Media Queries</span> to apply different styles per device</li>
-          <li>Test on actual smartphones and tablets</li>
-          <li>Mobile devices have <span class="hl">fixed</span> screen resolutions</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ===== CHAPTER 3 ===== -->
-  <div class="card ch3">
-    <div class="card-header">
-      <span class="ch-badge">CH 03</span>
-      <h2>Site Planning</h2>
-    </div>
-    <div class="card-body">
-
-      <div class="section">
-        <div class="section-title">Core Concept</div>
-        <div class="highlight-box hb-amber">
-          Plan before you build. Every successful site starts with a <span class="hl">project specification</span>, a clear goal, and a deep understanding of the audience.
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Development Lifecycle (In Order)</div>
-        <div class="steps">
-          <div class="step"><span class="step-num amber-num">1</span><span class="step-text"><strong>Requirements & Specs</strong> — Client needs, audience, technical constraints</span></div>
-          <div class="step"><span class="step-num amber-num">2</span><span class="step-text"><strong>Information Design</strong> — Taxonomy: classify & organize content hierarchy</span></div>
-          <div class="step"><span class="step-num amber-num">3</span><span class="step-text"><strong>Mockups & Wireframes</strong> — Sketch layouts; wireframes = detailed blueprints</span></div>
-          <div class="step"><span class="step-num amber-num">4</span><span class="step-text"><strong>Construction</strong> — Code the site once design is mostly finalized</span></div>
-          <div class="step"><span class="step-num amber-num">5</span><span class="step-text"><strong>QA & User Testing</strong> — Validate tech AND usability with real users</span></div>
-          <div class="step"><span class="step-num amber-num">6</span><span class="step-text"><strong>Publishing & Promotion</strong> — Launch + marketing</span></div>
-          <div class="step"><span class="step-num amber-num">7</span><span class="step-text"><strong>Ongoing Maintenance</strong> — Keep content fresh after launch</span></div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Site Specification Questions</div>
-        <ul class="cram">
-          <li>Who is the <span class="hl">client</span> and what are the goals?</li>
-          <li>Who is the <span class="hl">target audience</span>?</li>
-          <li>What are the <span class="hl">technical & budget</span> constraints?</li>
-          <li>How will you measure <span class="hl">success</span>?</li>
-          <li>Is this a <span class="hl">new site or upgrade</span>?</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Types of Web Sites</div>
-        <div class="tag-grid">
-          <span class="tag amber">Billboard</span>
-          <span class="tag amber">Publishing</span>
-          <span class="tag amber">Portal</span>
-          <span class="tag amber">Blog</span>
-          <span class="tag amber">E-commerce</span>
-          <span class="tag amber">Social Network</span>
-          <span class="tag amber">Wiki</span>
-          <span class="tag amber">RSS</span>
-          <span class="tag amber">Virtual Gallery</span>
-          <span class="tag amber">Intranet/Extranet</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Audience Analysis</div>
-        <div class="mini-cols">
-          <div>
-            <div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); margin-bottom:4px;">WHO ARE THEY?</div>
-            <ul class="cram">
-              <li>Gender / age</li>
-              <li>Education level</li>
-              <li>Technical skill</li>
-              <li>Reading level</li>
-            </ul>
+<span class="kw">p</span>  { <span class="val">color</span>: blue; }
+<span class="kw">h1</span> { <span class="val">border-bottom</span>: 1px solid; }
           </div>
-          <div>
-            <div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); margin-bottom:4px;">WHY DO THEY VISIT?</div>
-            <ul class="cram">
-              <li>Get information?</li>
-              <li>Download files?</li>
-              <li>Find links?</li>
-              <li>Make a purchase?</li>
-            </ul>
+          <div class="fact">One CSS file can style an <strong>entire website</strong></div>
+        </div>
+      </div>
+
+      <!-- OBJ 3: Describe history of HTML -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 3</span> Describe the History of HTML</div>
+        <div class="obj-body">
+          <div class="kv"><span class="kv-key">1989</span><span class="kv-val">Tim Berners-Lee proposes HTML at CERN</span></div>
+          <div class="kv"><span class="kv-key">1994</span><span class="kv-val">W3C founded at MIT to standardize the web</span></div>
+          <div class="kv"><span class="kv-key">HTML origin</span><span class="kv-val">Based on SGML — Standard Generalized Markup Language</span></div>
+          <div class="kv"><span class="kv-key">W3C role</span><span class="kv-val">Sets jointly developed standards benefiting everyone</span></div>
+        </div>
+      </div>
+
+      <!-- OBJ 4: Work with HTML5 -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 4</span> Work with HTML5</div>
+        <div class="obj-body">
+          <div class="fact"><strong>Element</strong> = opening tag + content + closing tag</div>
+          <div class="fact"><strong>Void element</strong> = single tag only (inserts content)</div>
+          <div class="pill-row">
+            <span class="pill">&lt;br&gt;</span>
+            <span class="pill">&lt;img&gt;</span>
+            <span class="pill">&lt;input&gt;</span>
+            <span class="pill">&lt;link&gt;</span>
+            <span class="pill">&lt;meta&gt;</span>
+          </div>
+          <hr class="rule-divider">
+          <div class="fact"><strong>Attribute</strong> = extra info inside an opening tag</div>
+          <div class="code"><span class="tag">&lt;h1 </span><span class="val">id=</span><span class="kw">"title"</span><span class="tag">&gt;</span>Main Title<span class="tag">&lt;/h1&gt;</span></div>
+        </div>
+      </div>
+
+      <!-- OBJ 5: Good coding practices -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 5</span> Use Good Coding Practices</div>
+        <div class="obj-body">
+          <div class="fact">Browser's <strong>rendering engine</strong> interprets HTML/CSS — different browsers may display differently</div>
+          <div class="fact">Always <strong>test in multiple browsers</strong> — Chrome, Firefox, Safari, Edge</div>
+          <div class="fact">Validate code; follow <strong>W3C standards</strong></div>
+          <div class="fact">HTML markup is hidden from users — only results are shown</div>
+        </div>
+      </div>
+
+    </div><!-- /ch1 -->
+
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER 2 — WEB DESIGN PRINCIPLES
+    ══════════════════════════════════════════ -->
+    <div class="ch ch2">
+      <div class="ch-label">Chapter 2</div>
+      <div class="ch-title">Web Site Design Principles</div>
+
+      <!-- OBJ 1: Understand web design environment -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 1</span> Understand the Web Design Environment</div>
+        <div class="obj-body">
+          <div class="fact">Many variables affect how pages appear — <strong>most cannot be controlled</strong></div>
+          <div class="pill-row">
+            <span class="pill">Browser type</span>
+            <span class="pill">Screen size</span>
+            <span class="pill">Connection speed</span>
+            <span class="pill">Device/OS</span>
+            <span class="pill">Font availability</span>
+          </div>
+          <hr class="rule-divider">
+          <div class="kv"><span class="kv-key">Rule</span><span class="kv-val">Code to W3C standards, validate, test on multiple browsers and devices</span></div>
+          <div class="kv"><span class="kv-key">Cache</span><span class="kv-val">Browser stores files locally on return visits — reuse graphics to exploit this</span></div>
+        </div>
+      </div>
+
+      <!-- OBJ 2: Design for multiple screen resolutions -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 2</span> Design for Multiple Screen Resolutions</div>
+        <div class="obj-body">
+          <div class="fact">Resolution = width × height in pixels. Common: <strong>1024×768</strong>, <strong>1366×768</strong></div>
+          <table class="mini-table">
+            <tr><th>Layout</th><th>Behavior</th></tr>
+            <tr><td><strong>Flexible</strong></td><td>Adapts to any screen width</td></tr>
+            <tr><td><strong>Fixed</strong></td><td>Set width; stays centered</td></tr>
+          </table>
+          <div class="fact" style="margin-top:4px;">Mobile devices have <strong>fixed</strong> resolutions — use CSS Media Queries to adapt styles per device</div>
+        </div>
+      </div>
+
+      <!-- OBJ 3: Craft look and feel -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 3</span> Craft the Look and Feel of the Site</div>
+        <div class="obj-body">
+          <div class="kv"><span class="kv-key">Look</span><span class="kv-val">Visual appearance — colors, fonts, layout, images</span></div>
+          <div class="kv"><span class="kv-key">Feel</span><span class="kv-val">User experience — navigation, responsiveness, interactions</span></div>
+          <div class="fact">Together they define the site's <strong>brand identity</strong> and overall UX</div>
+        </div>
+      </div>
+
+      <!-- OBJ 4: Create unified site design -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 4</span> Create a Unified Site Design</div>
+        <div class="obj-body">
+          <div class="fact"><strong>Consistent</strong> style, colors, and navigation across all pages</div>
+          <div class="fact">Reuse CSS and graphic elements for cohesion and faster loading</div>
+          <div class="fact">Design should reflect a clear <strong>brand identity</strong> throughout</div>
+        </div>
+      </div>
+
+      <!-- OBJ 5: Design for the user -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 5</span> Design for the User</div>
+        <div class="obj-body">
+          <div class="fact">Know your audience — adopt the <strong>user's perspective</strong></div>
+          <div class="fact">Design for varying connection speeds; plan for slow and fast users</div>
+          <div class="fact">Test on multiple <strong>devices and operating systems</strong></div>
+          <div class="fact">Users don't like waiting — <strong>optimize performance</strong></div>
+        </div>
+      </div>
+
+      <!-- OBJ 6: Design for accessibility -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 6</span> Design for Accessibility</div>
+        <div class="obj-body">
+          <div class="kv"><span class="kv-key">Contrast</span><span class="kv-val">Min 4.5:1 ratio (WCAG) for text readability</span></div>
+          <div class="kv"><span class="kv-key">Keyboard</span><span class="kv-val">All actions operable without a mouse</span></div>
+          <div class="kv"><span class="kv-key">Alt Text</span><span class="kv-val">Descriptive text on images for screen readers</span></div>
+          <div class="note">W3C WAI (Web Accessibility Initiative) publishes WCAG guidelines</div>
+        </div>
+      </div>
+
+    </div><!-- /ch2 -->
+
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER 3 — SITE PLANNING
+    ══════════════════════════════════════════ -->
+    <div class="ch ch3">
+      <div class="ch-label">Chapter 3</div>
+      <div class="ch-title">Site Planning</div>
+
+      <!-- OBJ 1: Understand development process -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 1</span> Understand the Web Site Development Process</div>
+        <div class="obj-body">
+          <ul class="steps-list">
+            <li><span class="step-n">1.</span>Requirements &amp; Specifications</li>
+            <li><span class="step-n">2.</span>Information Design &amp; Taxonomy</li>
+            <li><span class="step-n">3.</span>Graphic Design / Mockups / Wireframes</li>
+            <li><span class="step-n">4.</span>Construction &amp; Content Development</li>
+            <li><span class="step-n">5.</span>QA &amp; User Testing</li>
+            <li><span class="step-n">6.</span>Publishing &amp; Promotion</li>
+            <li><span class="step-n">7.</span>Ongoing Maintenance</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- OBJ 2: Create site specification -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 2</span> Create a Site Specification</div>
+        <div class="obj-body">
+          <div class="fact">A written doc covering: client goals, audience, budget, technical requirements, success criteria</div>
+          <div class="fact">Ask: <em>Is this a new site or upgrade? Are requirements feasible?</em></div>
+          <div class="fact">Start with pencil &amp; paper — write a <strong>mission statement</strong> first</div>
+        </div>
+      </div>
+
+      <!-- OBJ 3: Identify content goal -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 3</span> Identify the Content Goal</div>
+        <div class="obj-body">
+          <div class="fact">Adopt your <strong>user's perspective</strong> — their goals ≠ your goals</div>
+          <div class="pill-row">
+            <span class="pill">Billboard</span>
+            <span class="pill">Blog</span>
+            <span class="pill">Portal</span>
+            <span class="pill">E-commerce</span>
+            <span class="pill">Wiki</span>
+            <span class="pill">Social</span>
+            <span class="pill">Intranet</span>
+            <span class="pill">Gallery</span>
           </div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Key Terms</div>
-        <div class="term-row"><span class="term">Taxonomy</span><span class="def">Classification & hierarchy of site content for navigation</span></div>
-        <div class="term-row"><span class="term">Wireframe</span><span class="def">Detailed stable layout blueprint before coding</span></div>
-        <div class="term-row"><span class="term">Web Analytics</span><span class="def">Stats from web server to track user activity & traffic</span></div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ===== CHAPTER 4 ===== -->
-  <div class="card ch4">
-    <div class="card-header">
-      <span class="ch-badge">CH 04</span>
-      <h2>Cascading Style Sheets (CSS)</h2>
-    </div>
-    <div class="card-body">
-
-      <div class="section">
-        <div class="section-title">Core Concept</div>
-        <div class="highlight-box hb-green">
-          CSS separates <span class="hl-green">presentation from content</span>. One style sheet can control the entire site's visual design.
+      <!-- OBJ 4: Analyze audience -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 4</span> Analyze Your Audience</div>
+        <div class="obj-body">
+          <div class="kv"><span class="kv-key">Who?</span><span class="kv-val">Age, gender, education, reading level, tech skill</span></div>
+          <div class="kv"><span class="kv-key">Why?</span><span class="kv-val">Info, downloads, links, purchases, support</span></div>
+          <div class="kv"><span class="kv-key">How?</span><span class="kv-val">Connection speed, device type, browser</span></div>
+          <div class="kv"><span class="kv-key">Analytics</span><span class="kv-val">Server stats to track visits, popular pages, traffic sources</span></div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Anatomy of a Style Rule</div>
-        <div class="code-block">
-<span class="cm">/* selector  { property : value ; } */</span>
-   <span class="kw">p</span>         { <span class="str">color</span>     : blue   ; }
-   <span class="kw">h1</span>        { <span class="str">font-size</span>: 24px   ; }
-        </div>
-        <div class="term-row"><span class="term">Selector</span><span class="def">Which element(s) to target</span></div>
-        <div class="term-row"><span class="term">Property</span><span class="def">What characteristic to change (color, font-size…)</span></div>
-        <div class="term-row"><span class="term">Value</span><span class="def">The specific setting for that property</span></div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">3 Ways to Apply CSS</div>
-        <table class="compare-table">
-          <tr><th>Method</th><th>Location</th><th>Scope</th></tr>
-          <tr>
-            <td class="label-col">External ✅</td>
-            <td>Separate .css file, linked via &lt;link&gt;</td>
-            <td>Whole site</td>
-          </tr>
-          <tr>
-            <td class="label-col">Internal</td>
-            <td>&lt;style&gt; in &lt;head&gt;</td>
-            <td>One page</td>
-          </tr>
-          <tr>
-            <td class="label-col">Inline</td>
-            <td>style="" attribute on element</td>
-            <td>One element</td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Linking External CSS</div>
-        <div class="code-block">
-<span class="kw">&lt;head&gt;</span>
-  <span class="kw">&lt;link</span> <span class="str">href</span>=<span class="str">"styles.css"</span>
-        <span class="str">rel</span>=<span class="str">"stylesheet"</span>
-        <span class="str">type</span>=<span class="str">"text/css"</span><span class="kw">&gt;</span>
-<span class="kw">&lt;/head&gt;</span>
+      <!-- OBJ 5: Build development team -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 5</span> Build a Web Site Development Team</div>
+        <div class="obj-body">
+          <div class="pill-row">
+            <span class="pill">Project Manager</span>
+            <span class="pill">HTML Developer</span>
+            <span class="pill">Designer</span>
+            <span class="pill">Writer</span>
+            <span class="pill">App Developer</span>
+            <span class="pill">DBA</span>
+            <span class="pill">Server Admin</span>
+          </div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Inheritance</div>
-        <div class="highlight-box hb-green">
-          Child elements <strong>inherit</strong> styles from parents. Set <code style="color:#86efac">body { color: red; }</code> and all text turns red — no need to style every element separately.
-        </div>
-        <div class="code-block">
-<span class="cm">/* Without inheritance: 5 rules */</span>
-<span class="kw">h1,p,ul,em,li</span> { <span class="str">color</span>: red; }
-
-<span class="cm">/* With inheritance: 1 rule */</span>
-<span class="kw">body</span> { <span class="str">color</span>: red; }
+      <!-- OBJ 6: Filename conventions & URLs -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 6</span> Create Conventions for Filenames &amp; URLs</div>
+        <div class="obj-body">
+          <div class="kv"><span class="kv-key">Standard</span><span class="kv-val">ISO 9660 — works across all operating systems</span></div>
+          <div class="kv"><span class="kv-key">Rules</span><span class="kv-val">Lowercase only · underscores not spaces · no special chars · correct extensions</span></div>
+          <div class="kv"><span class="kv-key">Full URL</span><span class="kv-val">Complete address to any file on the web</span></div>
+          <div class="kv"><span class="kv-key">Partial URL</span><span class="kv-val">Relative path on the same server</span></div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Selector Types</div>
-        <div class="term-row"><span class="term">Type</span><span class="def"><code style="color:#86efac">h1 { }</code> — targets ALL matching elements</span></div>
-        <div class="term-row"><span class="term">Grouping</span><span class="def"><code style="color:#86efac">h1, h2, p { }</code> — multiple elements, one rule</span></div>
-        <div class="term-row"><span class="term">Class</span><span class="def"><code style="color:#86efac">.highlight { }</code> — reusable on many elements</span></div>
-        <div class="term-row"><span class="term">ID</span><span class="def"><code style="color:#86efac">#header { }</code> — unique, one element only</span></div>
-        <div class="term-row"><span class="term">Descendant</span><span class="def"><code style="color:#86efac">div p { }</code> — targets p inside div only</span></div>
+      <!-- OBJ 7: Directory structure -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 7</span> Set a Directory Structure</div>
+        <div class="obj-body">
+          <div class="fact">Use <strong>relative paths</strong> — structure must be transferable between computers</div>
+          <div class="pill-row">
+            <span class="pill">Single Folder</span>
+            <span class="pill">Hierarchical</span>
+            <span class="pill">Segregated</span>
+            <span class="pill">Linear</span>
+            <span class="pill">Web/Cluster</span>
+          </div>
+        </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Clean CSS Code Tips</div>
-        <ul class="cram">
-          <li>One property per line for <span class="hl">readability</span></li>
-          <li>Use <span class="hl">comments</span> /* like this */ to explain blocks</li>
-          <li>Use <span class="hl">&lt;div&gt;</span> (block) and <span class="hl">&lt;span&gt;</span> (inline) as hooks for styling</li>
-          <li>External CSS is best practice for <span class="hl">maintainability</span></li>
-        </ul>
+      <!-- OBJ 8-10: Storyboard, Publish, Test -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 8–10</span> Storyboard · Publish · Test</div>
+        <div class="obj-body">
+          <div class="kv"><span class="kv-key">Storyboard</span><span class="kv-val">Visual map of all pages and how they link together</span></div>
+          <div class="kv"><span class="kv-key">Hosting</span><span class="kv-val">Choose a web host (check support, email, SSL, bandwidth)</span></div>
+          <div class="kv"><span class="kv-key">FTP</span><span class="kv-val">Transfer HTML, images and files to the web server</span></div>
+          <div class="kv"><span class="kv-key">Test</span><span class="kv-val">Browsers · OS · devices · connection speeds · links · usability</span></div>
+        </div>
       </div>
 
-    </div>
+    </div><!-- /ch3 -->
+
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER 4 — CSS
+    ══════════════════════════════════════════ -->
+    <div class="ch ch4">
+      <div class="ch-label">Chapter 4</div>
+      <div class="ch-title">Cascading Style Sheets</div>
+
+      <!-- OBJ 1: Recognize benefits of CSS -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 1</span> Recognize the Benefits of Using CSS</div>
+        <div class="obj-body">
+          <div class="fact">Separates <strong>presentation from content</strong> — structure in HTML, style in CSS</div>
+          <div class="fact">One stylesheet controls the <strong>entire site</strong> — change once, update everywhere</div>
+          <div class="fact">CSS3 is the latest release; modern browsers offer full support</div>
+        </div>
+      </div>
+
+      <!-- OBJ 2: Build a basic style sheet -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 2</span> Build a Basic Style Sheet</div>
+        <div class="obj-body">
+          <table class="mini-table">
+            <tr><th>Method</th><th>Where</th><th>Scope</th></tr>
+            <tr><td class="tc">&lt;link&gt; ✅</td><td>.css file</td><td>Whole site</td></tr>
+            <tr><td class="tc">&lt;style&gt;</td><td>&lt;head&gt;</td><td>One page</td></tr>
+            <tr><td class="tc">style=""</td><td>element</td><td>One element</td></tr>
+          </table>
+          <div class="code" style="margin-top:5px;">
+<span class="cm">/* External link in &lt;head&gt; */</span>
+<span class="tag">&lt;link</span> <span class="val">href=</span><span class="kw">"styles.css"</span>
+      <span class="val">rel=</span><span class="kw">"stylesheet"</span><span class="tag">&gt;</span>
+          </div>
+          <div class="fact">Write one property per line; use <strong>comments</strong> for clarity</div>
+        </div>
+      </div>
+
+      <!-- OBJ 3: Inheritance -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 3</span> Use Inheritance to Write Simpler Style Rules</div>
+        <div class="obj-body">
+          <div class="fact">Child elements <strong>inherit</strong> styles from parent elements</div>
+          <div class="code">
+<span class="cm">/* Instead of styling h1, p, ul, em, li... */</span>
+<span class="kw">body</span> { <span class="val">color</span>: red; } <span class="cm">/* all inherit! */</span>
+          </div>
+          <div class="fact">Check property descriptions to know if a property is <strong>inherited</strong></div>
+        </div>
+      </div>
+
+      <!-- OBJ 4&5: Basic selection techniques -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 4–5</span> Examine &amp; Apply Basic Selection Techniques</div>
+        <div class="obj-body">
+          <div class="kv"><span class="kv-key">Type</span><span class="kv-val"><code>h1 { }</code> — targets every matching element</span></div>
+          <div class="kv"><span class="kv-key">Grouping</span><span class="kv-val"><code>h1, h2, p { }</code> — one rule for many elements</span></div>
+          <div class="kv"><span class="kv-key">Combining</span><span class="kv-val"><code>h1 { color: red; font-size: 24px; }</code></span></div>
+          <div class="kv"><span class="kv-key">Descendant</span><span class="kv-val"><code>div p { }</code> — targets p only inside div</span></div>
+        </div>
+      </div>
+
+      <!-- OBJ 6: Class and ID selectors -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 6</span> Use Class and ID Selectors</div>
+        <div class="obj-body">
+          <div class="code">
+<span class="cm">/* Class — reusable on many elements */</span>
+<span class="kw">.highlight</span> { <span class="val">background</span>: yellow; }
+
+<span class="cm">/* ID — unique, one element only */</span>
+<span class="kw">#header</span> { <span class="val">font-size</span>: 32px; }
+          </div>
+          <div class="fact">Class = <strong>reusable</strong> style. ID = <strong>unique</strong> element on the page</div>
+        </div>
+      </div>
+
+      <!-- OBJ 7: div and span -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 7</span> Use the &lt;div&gt; and &lt;span&gt; Elements</div>
+        <div class="obj-body">
+          <div class="kv"><span class="kv-key">&lt;div&gt;</span><span class="kv-val"><strong>Block-level</strong> container — groups sections of content</span></div>
+          <div class="kv"><span class="kv-key">&lt;span&gt;</span><span class="kv-val"><strong>Inline</strong> container — styles a portion of text</span></div>
+          <div class="fact">Paired with class/ID selectors to create layout elements and style hooks</div>
+        </div>
+      </div>
+
+      <!-- OBJ 8: Other selectors -->
+      <div class="obj-block">
+        <div class="obj-head"><span class="obj-num">OBJ 8</span> Use Other Selectors</div>
+        <div class="obj-body">
+          <div class="kv"><span class="kv-key">Attribute</span><span class="kv-val"><code>img[title=home]{ }</code> — targets by attribute value</span></div>
+          <div class="kv"><span class="kv-key">Pseudo-class</span><span class="kv-val">Select by state: <code>:link :visited :hover :active</code></span></div>
+          <div class="kv"><span class="kv-key">Pseudo-elem</span><span class="kv-val"><code>p:first-letter</code> <code>p:first-line</code> <code>:before</code> <code>:after</code></span></div>
+          <hr class="rule-divider">
+          <div class="fact">Link pseudo-class order: <strong>L</strong>o<strong>V</strong>e <strong>HA</strong>te — Link, Visited, Hover, Active</div>
+          <div class="fact"><strong>Cascade</strong> resolves conflicts by: specificity → rule order → <code>!important</code></div>
+        </div>
+      </div>
+
+    </div><!-- /ch4 -->
+
+  </div><!-- /chapters -->
+
+  <div class="footer">
+    <span>Principles of Web Design 6e &nbsp;·&nbsp; For study use only</span>
+    <span>Ch1: HTML5 &nbsp;·&nbsp; Ch2: Design Principles &nbsp;·&nbsp; Ch3: Site Planning &nbsp;·&nbsp; Ch4: CSS</span>
   </div>
 
-</div>
-
-<!-- Quick Reference Row -->
-<div style="margin-top:14px; display:grid; grid-template-columns: repeat(3,1fr); gap:14px;">
-
-  <!-- Link vs A -->
-  <div class="card" style="border-left: 3px solid #f472b6;">
-    <div class="card-header" style="background: linear-gradient(90deg, rgba(244,114,182,0.2), transparent);">
-      <span class="ch-badge" style="background:rgba(244,114,182,0.2); color:#f9a8d4;">&lt;link&gt; vs &lt;a&gt;</span>
-      <h2>Tag Differences</h2>
-    </div>
-    <div class="card-body">
-      <table class="compare-table">
-        <tr><th></th><th>&lt;link&gt;</th><th>&lt;a&gt;</th></tr>
-        <tr><td class="label-col">Location</td><td>&lt;head&gt;</td><td>&lt;body&gt;</td></tr>
-        <tr><td class="label-col">Visible?</td><td>No</td><td>Yes (clickable)</td></tr>
-        <tr><td class="label-col">Purpose</td><td>Load resources</td><td>Navigate pages</td></tr>
-        <tr><td class="label-col">Interaction</td><td>Automatic</td><td>User clicks</td></tr>
-        <tr><td class="label-col">Common Use</td><td>CSS, favicons</td><td>Hyperlinks</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- W3C -->
-  <div class="card" style="border-left: 3px solid #818cf8;">
-    <div class="card-header" style="background: linear-gradient(90deg, rgba(129,140,248,0.2), transparent);">
-      <span class="ch-badge" style="background:rgba(129,140,248,0.2); color:#a5b4fc;">W3C</span>
-      <h2>World Wide Web Consortium</h2>
-    </div>
-    <div class="card-body">
-      <div class="highlight-box" style="background:rgba(129,140,248,0.08); border-left:3px solid #818cf8; color:#e0e7ff; margin-bottom:8px;">
-        Founded <span class="hl">1994</span> by Tim Berners-Lee. Sets universal standards so the web works consistently everywhere.
-      </div>
-      <div class="term-row"><span class="term" style="min-width:80px;">Standards</span><span class="def">HTML, CSS, XML — universal rules for all browsers</span></div>
-      <div class="term-row"><span class="term" style="min-width:80px;">Accessibility</span><span class="def">WAI initiative + WCAG guidelines</span></div>
-      <div class="term-row"><span class="term" style="min-width:80px;">Open Web</span><span class="def">Keeps web free, neutral, not vendor-controlled</span></div>
-      <div class="term-row"><span class="term" style="min-width:80px;">Compatibility</span><span class="def">Ensures sites work across all browsers & devices</span></div>
-    </div>
-  </div>
-
-  <!-- Testing Variables -->
-  <div class="card" style="border-left: 3px solid #34d399;">
-    <div class="card-header" style="background: linear-gradient(90deg, rgba(52,211,153,0.2), transparent);">
-      <span class="ch-badge" style="background:rgba(52,211,153,0.2); color:#6ee7b7;">TESTING</span>
-      <h2>Website Testing Variables</h2>
-    </div>
-    <div class="card-body">
-      <div class="term-row">
-        <span class="term" style="min-width:95px; color:#6ee7b7;">1. Browser</span>
-        <span class="def">Test on Chrome, Firefox, Safari, Edge — each renders differently</span>
-      </div>
-      <div class="term-row">
-        <span class="term" style="min-width:95px; color:#6ee7b7;">2. Responsive</span>
-        <span class="def">Check layout on desktop, tablet, and mobile screen sizes</span>
-      </div>
-      <div class="term-row">
-        <span class="term" style="min-width:95px; color:#6ee7b7;">3. Performance</span>
-        <span class="def">Measure page load speed; optimize images and resources</span>
-      </div>
-      <div class="term-row">
-        <span class="term" style="min-width:95px; color:#6ee7b7;">4. Security</span>
-        <span class="def">Check for SQL injection, auth flaws, and data vulnerabilities</span>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="footer">Principles of Web Design 6e &nbsp;·&nbsp; Chapters 1–4 Cram Sheet &nbsp;·&nbsp; For study use only</div>
-
+</div><!-- /page -->
 </body>
 </html>
