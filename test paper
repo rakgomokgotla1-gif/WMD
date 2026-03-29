@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAC Exam – Principles of Web Design</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --mid: #4a4540;
+    --muted: #7a7570;
+    --rule: #c8c0b4;
+    --paper: #fdfaf5;
+    --tint: #f5f0e8;
+    --accent: #8b1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #d4cfc7;
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--ink);
+    padding: 30px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .exam-paper {
+    background: var(--paper);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 52px 64px;
+    box-shadow: 0 2px 40px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06);
+    position: relative;
+  }
+
+  /* Margin line */
+  .exam-paper::before {
+    content: '';
+    position: absolute;
+    left: 100px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(200,150,150,0.3);
+  }
+
+  /* ── HEADER ── */
+  .exam-header {
+    text-align: center;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+  }
+  .ministry {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 10px;
+  }
+  .exam-title {
+    font-family: 'IM Fell English', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .exam-subtitle {
+    font-family: 'IM Fell English', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--mid);
+  }
+
+  /* Candidate info box */
+  .candidate-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--ink);
+    margin: 18px 0 24px;
+    font-size: 11.5px;
+  }
+  .candidate-field {
+    padding: 6px 10px;
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .candidate-field:nth-child(even) { border-right: none; }
+  .candidate-field:nth-last-child(-n+2) { border-bottom: none; }
+  .field-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .field-line {
+    flex: 1;
+    border-bottom: 1px solid var(--rule);
+    min-width: 80px;
+  }
+
+  /* Instructions box */
+  .instructions {
+    background: var(--tint);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin-bottom: 28px;
+    font-size: 11.5px;
+  }
+  .instructions-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 7px;
+    font-weight: 500;
+  }
+  .instructions ol {
+    padding-left: 18px;
+    color: var(--mid);
+  }
+  .instructions ol li {
+    margin-bottom: 3px;
+  }
+
+  /* Mark scheme row */
+  .mark-scheme {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--rule);
+    margin-bottom: 28px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+  }
+  .mark-cell {
+    flex: 1;
+    text-align: center;
+    padding: 5px 4px;
+    border-right: 1px solid var(--rule);
+  }
+  .mark-cell:last-child { border-right: none; }
+  .mark-cell .sec { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; display: block; }
+  .mark-cell .pts { font-size: 13px; color: var(--ink); font-weight: 500; }
+  .mark-cell.total { background: var(--tint); }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0 20px;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--ink);
+  }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  /* ── QUESTION ── */
+  .question {
+    margin-bottom: 22px;
+    page-break-inside: avoid;
+  }
+  .q-head {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  .q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--accent);
+    background: rgba(139,26,26,0.07);
+    border: 1px solid rgba(139,26,26,0.2);
+    padding: 1px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-marks {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 4px;
+    margin-left: auto;
+  }
+  .q-text {
+    font-size: 13px;
+    color: var(--ink);
+    flex: 1;
+    line-height: 1.55;
+  }
+  .q-text strong { color: var(--accent); }
+
+  /* Sub-questions */
+  .sub-questions {
+    margin-top: 8px;
+    padding-left: 28px;
+  }
+  .sub-q {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 7px;
+    align-items: flex-start;
+  }
+  .sub-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--mid);
+    font-weight: 500;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: right;
+    padding-top: 1px;
+  }
+  .sub-text {
+    font-size: 12.5px;
+    color: var(--ink);
+    flex: 1;
+    line-height: 1.5;
+  }
+  .sub-marks {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  /* Answer lines */
+  .answer-lines {
+    margin-top: 6px;
+    padding-left: 28px;
+  }
+  .ans-line {
+    border-bottom: 1px solid var(--rule);
+    height: 22px;
+    margin-bottom: 0;
+  }
+
+  /* Code snippet in question */
+  .q-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: var(--tint);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--mid);
+    padding: 8px 12px;
+    margin: 8px 0 6px 28px;
+    line-height: 1.8;
+    color: var(--mid);
+  }
+  .q-code .kw { color: var(--accent); }
+  .q-code .val { color: #1a5c2a; }
+  .q-code .cm { color: var(--muted); font-style: italic; }
+
+  /* MCQ options */
+  .mcq-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
+    margin: 8px 0 4px 28px;
+  }
+  .opt {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    font-size: 12.5px;
+  }
+  .opt-letter {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--mid);
+    font-weight: 500;
+    width: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Match table */
+  .match-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 4px 28px;
+    width: calc(100% - 28px);
+    font-size: 12px;
+  }
+  .match-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    padding: 4px 10px;
+    border-bottom: 1px solid var(--ink);
+    text-align: left;
+  }
+  .match-table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .match-table .col-a { width: 30%; font-weight: 600; color: var(--ink); }
+  .match-table .col-b { width: 15%; text-align: center; }
+  .match-table .col-c { color: var(--mid); }
+
+  /* True/False */
+  .tf-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 4px 0 4px 28px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 12.5px;
+  }
+  .tf-row:last-child { border-bottom: none; }
+  .tf-check { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); }
+  .tf-boxes {
+    margin-left: auto;
+    display: flex;
+    gap: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .tf-box {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .box { width: 14px; height: 14px; border: 1px solid var(--mid); display: inline-block; flex-shrink: 0; }
+
+  /* Scenario box */
+  .scenario {
+    background: var(--tint);
+    border: 1px solid var(--rule);
+    padding: 10px 14px;
+    margin: 8px 0 6px 0;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+  .scenario strong { font-style: normal; color: var(--ink); }
+
+  /* Page footer */
+  .page-footer {
+    margin-top: 36px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  /* Blank fill */
+  .blank { border-bottom: 1px solid var(--ink); display: inline-block; min-width: 100px; margin: 0 3px; }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .exam-paper { box-shadow: none; padding: 30px 40px; max-width: 100%; }
+    .exam-paper::before { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="exam-paper">
+
+  <!-- HEADER -->
+  <div class="exam-header">
+    <div class="ministry">Ministry of Education &nbsp;·&nbsp; Department of Information Technology</div>
+    <div class="exam-title">PRINCIPLES OF WEB DESIGN</div>
+    <div class="exam-subtitle">End-of-Unit Examination &nbsp;&mdash;&nbsp; Chapters 1 through 4</div>
+  </div>
+
+  <!-- CANDIDATE FIELDS -->
+  <div class="candidate-box">
+    <div class="candidate-field"><span class="field-label">Candidate Name</span><span class="field-line"></span></div>
+    <div class="candidate-field"><span class="field-label">Date</span><span class="field-line"></span></div>
+    <div class="candidate-field"><span class="field-label">Student Number</span><span class="field-line"></span></div>
+    <div class="candidate-field"><span class="field-label">Class / Group</span><span class="field-line"></span></div>
+  </div>
+
+  <!-- INSTRUCTIONS -->
+  <div class="instructions">
+    <div class="instructions-title">General Instructions</div>
+    <ol>
+      <li>This paper contains <strong>four sections</strong> corresponding to Chapters 1–4. Attempt <strong>all questions</strong>.</li>
+      <li>Write legibly in the spaces provided. Answers written outside the answer spaces will not be marked.</li>
+      <li>The total marks for this paper are <strong>100</strong>. The marks for each question are shown in brackets.</li>
+      <li>Time allowed: <strong>2 hours 30 minutes</strong>. No additional time will be given.</li>
+      <li>Electronic devices, notes, and textbooks are <strong>not permitted</strong>.</li>
+    </ol>
+  </div>
+
+  <!-- MARK SCHEME -->
+  <div class="mark-scheme">
+    <div class="mark-cell"><span class="sec">Section A</span><span class="pts">/ 25</span></div>
+    <div class="mark-cell"><span class="sec">Section B</span><span class="pts">/ 25</span></div>
+    <div class="mark-cell"><span class="sec">Section C</span><span class="pts">/ 25</span></div>
+    <div class="mark-cell"><span class="sec">Section D</span><span class="pts">/ 25</span></div>
+    <div class="mark-cell total"><span class="sec">Total</span><span class="pts">/ 100</span></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION A — CHAPTER 1: HTML5
+  ══════════════════════════════════════════ -->
+  <div class="section-divider"><span class="section-tag">Section A &nbsp;·&nbsp; Chapter 1: HTML5 &nbsp;·&nbsp; [25 marks]</span></div>
+
+  <!-- Q1: MCQ -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q1</span>
+      <span class="q-text">Which of the following best describes the purpose of the <strong>&lt;!DOCTYPE html&gt;</strong> declaration?</span>
+      <span class="q-marks">[2]</span>
+    </div>
+    <div class="mcq-options">
+      <div class="opt"><span class="opt-letter">A.</span> It defines the page title shown in the browser tab</div>
+      <div class="opt"><span class="opt-letter">B.</span> It tells the browser which rules to use when rendering the document</div>
+      <div class="opt"><span class="opt-letter">C.</span> It links an external CSS stylesheet to the HTML file</div>
+      <div class="opt"><span class="opt-letter">D.</span> It sets the character encoding for the document</div>
+    </div>
+    <div class="answer-lines"><div class="ans-line"></div></div>
+  </div>
+
+  <!-- Q2: True/False -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q2</span>
+      <span class="q-text">Indicate whether each of the following statements is <strong>True</strong> or <strong>False</strong> by placing a tick (✓) in the correct box.</span>
+      <span class="q-marks">[4]</span>
+    </div>
+    <div style="margin-top:8px;">
+      <div class="tf-row"><span class="tf-check">i.</span><span>Void elements require both an opening and a closing tag.</span><div class="tf-boxes"><div class="tf-box"><div class="box"></div> True</div><div class="tf-box"><div class="box"></div> False</div></div></div>
+      <div class="tf-row"><span class="tf-check">ii.</span><span>The <code>&lt;body&gt;</code> section is the container for descriptive meta-information about the document.</span><div class="tf-boxes"><div class="tf-box"><div class="box"></div> True</div><div class="tf-box"><div class="box"></div> False</div></div></div>
+      <div class="tf-row"><span class="tf-check">iii.</span><span>HTML was originally proposed by Tim Berners-Lee at CERN in 1989.</span><div class="tf-boxes"><div class="tf-box"><div class="box"></div> True</div><div class="tf-box"><div class="box"></div> False</div></div></div>
+      <div class="tf-row"><span class="tf-check">iv.</span><span>The W3C was founded to ensure that web standards are controlled by a single commercial vendor.</span><div class="tf-boxes"><div class="tf-box"><div class="box"></div> True</div><div class="tf-box"><div class="box"></div> False</div></div></div>
+    </div>
+  </div>
+
+  <!-- Q3: Fill in the blanks -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q3</span>
+      <span class="q-text">Complete the following sentences by writing the correct term in each blank.</span>
+      <span class="q-marks">[5]</span>
+    </div>
+    <div class="sub-questions">
+      <div class="sub-q"><span class="sub-label">i.</span><span class="sub-text">An HTML element that consists of only a single tag is called a <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> element.</span></div>
+      <div class="sub-q"><span class="sub-label">ii.</span><span class="sub-text">The <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> provides extra information about an element and is written inside the opening tag.</span></div>
+      <div class="sub-q"><span class="sub-label">iii.</span><span class="sub-text">HTML is an application of <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>, the Standard Generalized Markup Language.</span></div>
+      <div class="sub-q"><span class="sub-label">iv.</span><span class="sub-text">CSS stands for <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.</span></div>
+      <div class="sub-q"><span class="sub-label">v.</span><span class="sub-text">The component in a browser that interprets and renders HTML is called the <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.</span></div>
+    </div>
+  </div>
+
+  <!-- Q4: Code analysis -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q4</span>
+      <span class="q-text">Study the HTML5 code snippet below and answer the questions that follow.</span>
+      <span class="q-marks">[6]</span>
+    </div>
+    <div class="q-code">
+<span class="kw">&lt;!DOCTYPE html&gt;</span><br>
+<span class="kw">&lt;html&gt;</span><br>
+&nbsp;&nbsp;<span class="kw">&lt;head&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">&lt;title&gt;</span>My Page<span class="kw">&lt;/title&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">&lt;link</span> <span class="val">href=</span><span class="cm">"styles.css"</span> <span class="val">rel=</span><span class="cm">"stylesheet"</span><span class="kw">&gt;</span><br>
+&nbsp;&nbsp;<span class="kw">&lt;/head&gt;</span><br>
+&nbsp;&nbsp;<span class="kw">&lt;body&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">&lt;h1</span> <span class="val">id=</span><span class="cm">"main"</span><span class="kw">&gt;</span>Welcome<span class="kw">&lt;/h1&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">&lt;p&gt;</span>Hello, World!<span class="kw">&lt;/p&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">&lt;br&gt;</span><br>
+&nbsp;&nbsp;<span class="kw">&lt;/body&gt;</span><br>
+<span class="kw">&lt;/html&gt;</span>
+    </div>
+    <div class="sub-questions">
+      <div class="sub-q"><span class="sub-label">a.</span><span class="sub-text">Identify the <em>root element</em> in the code above.</span><span class="sub-marks">[1]</span></div>
+      <div class="answer-lines"><div class="ans-line"></div></div>
+      <div class="sub-q" style="margin-top:8px;"><span class="sub-label">b.</span><span class="sub-text">The <code>&lt;br&gt;</code> tag on line 10 is a void element. State what is meant by a <em>void element</em> and give one other example.</span><span class="sub-marks">[2]</span></div>
+      <div class="answer-lines"><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div></div>
+      <div class="sub-q" style="margin-top:8px;"><span class="sub-label">c.</span><span class="sub-text">The <code>&lt;link&gt;</code> element in the <code>&lt;head&gt;</code> references <em>styles.css</em>. Explain the purpose of this line and state the difference between the <code>&lt;link&gt;</code> tag and the <code>&lt;a&gt;</code> tag.</span><span class="sub-marks">[3]</span></div>
+      <div class="answer-lines"><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div></div>
+    </div>
+  </div>
+
+  <!-- Q5: Short answer -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q5</span>
+      <span class="q-text">List and briefly explain <strong>any four</strong> HTML5 semantic elements used for page structure.</span>
+      <span class="q-marks">[8]</span>
+    </div>
+    <div class="answer-lines">
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION B — CHAPTER 2: WEB DESIGN PRINCIPLES
+  ══════════════════════════════════════════ -->
+  <div class="section-divider"><span class="section-tag">Section B &nbsp;·&nbsp; Chapter 2: Web Design Principles &nbsp;·&nbsp; [25 marks]</span></div>
+
+  <!-- Q6: Define -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q6</span>
+      <span class="q-text">Define the term <strong>W3C</strong> and state <strong>any three</strong> of its purposes in the context of web development.</span>
+      <span class="q-marks">[4]</span>
+    </div>
+    <div class="answer-lines">
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+    </div>
+  </div>
+
+  <!-- Q7: Matching -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q7</span>
+      <span class="q-text">Match each term in Column A with its correct definition in Column B by writing the appropriate letter in the space provided.</span>
+      <span class="q-marks">[5]</span>
+    </div>
+    <table class="match-table">
+      <tr><th>Column A — Term</th><th>Answer</th><th>Column B — Definition</th></tr>
+      <tr><td class="col-a">1. Screen resolution</td><td class="col-b"><div class="box" style="margin:auto;"></div></td><td class="col-c">A. The visual appearance, colors, fonts, and layout of a website</td></tr>
+      <tr><td class="col-a">2. Browser cache</td><td class="col-b"><div class="box" style="margin:auto;"></div></td><td class="col-c">B. A layout that adjusts automatically to different screen sizes</td></tr>
+      <tr><td class="col-a">3. Look and feel</td><td class="col-b"><div class="box" style="margin:auto;"></div></td><td class="col-c">C. Width and height of a screen measured in pixels</td></tr>
+      <tr><td class="col-a">4. Flexible layout</td><td class="col-b"><div class="box" style="margin:auto;"></div></td><td class="col-c">D. Local storage of downloaded web files for faster repeat visits</td></tr>
+      <tr><td class="col-a">5. CSS Media Query</td><td class="col-b"><div class="box" style="margin:auto;"></div></td><td class="col-c">E. A CSS technique for applying different styles to different devices</td></tr>
+    </table>
+  </div>
+
+  <!-- Q8: Accessibility -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q8</span>
+      <span class="q-text">State and explain <strong>three</strong> accessibility features a web designer should consider when building a website.</span>
+      <span class="q-marks">[6]</span>
+    </div>
+    <div class="answer-lines">
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+    </div>
+  </div>
+
+  <!-- Q9: Compare -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q9</span>
+      <span class="q-text">Differentiate between a <strong>fixed-width layout</strong> and a <strong>flexible layout</strong>. State <strong>one advantage</strong> of each.</span>
+      <span class="q-marks">[4]</span>
+    </div>
+    <div class="answer-lines">
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+    </div>
+  </div>
+
+  <!-- Q10: Scenario -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q10</span>
+      <span class="q-text">Read the scenario below and answer the questions that follow.</span>
+      <span class="q-marks">[6]</span>
+    </div>
+    <div class="scenario">
+      <strong>Scenario:</strong> Amara is designing a news website that will be accessed by users on desktop computers, tablets, and mobile phones. Some users have slow internet connections, and a portion of the audience has visual impairments.
+    </div>
+    <div class="sub-questions">
+      <div class="sub-q"><span class="sub-label">a.</span><span class="sub-text">Identify <strong>two variables</strong> that Amara cannot control when designing her website.</span><span class="sub-marks">[2]</span></div>
+      <div class="answer-lines"><div class="ans-line"></div><div class="ans-line"></div></div>
+      <div class="sub-q" style="margin-top:8px;"><span class="sub-label">b.</span><span class="sub-text">Recommend <strong>two specific design decisions</strong> Amara should make to accommodate users with slow connections.</span><span class="sub-marks">[2]</span></div>
+      <div class="answer-lines"><div class="ans-line"></div><div class="ans-line"></div></div>
+      <div class="sub-q" style="margin-top:8px;"><span class="sub-label">c.</span><span class="sub-text">Suggest <strong>one accessibility feature</strong> Amara should include to support visually impaired users. Justify your answer.</span><span class="sub-marks">[2]</span></div>
+      <div class="answer-lines"><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION C — CHAPTER 3: SITE PLANNING
+  ══════════════════════════════════════════ -->
+  <div class="section-divider"><span class="section-tag">Section C &nbsp;·&nbsp; Chapter 3: Site Planning &nbsp;·&nbsp; [25 marks]</span></div>
+
+  <!-- Q11: Order steps -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q11</span>
+      <span class="q-text">The stages of the web site development lifecycle are listed below <strong>out of order</strong>. Write the numbers 1–7 in the boxes to indicate the correct sequence.</span>
+      <span class="q-marks">[7]</span>
+    </div>
+    <div style="margin-top:10px; padding-left:14px;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:7px; font-size:12.5px;"><div class="box"></div> Quality Assurance and User Testing</div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:7px; font-size:12.5px;"><div class="box"></div> Requirements and Specifications</div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:7px; font-size:12.5px;"><div class="box"></div> Ongoing Maintenance</div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:7px; font-size:12.5px;"><div class="box"></div> Construction and Content Development</div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:7px; font-size:12.5px;"><div class="box"></div> Information Design and Taxonomy Creation</div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:7px; font-size:12.5px;"><div class="box"></div> Publishing and Promotion</div>
+      <div style="display:flex; align-items:center; gap:10px; font-size:12.5px;"><div class="box"></div> Graphic Design and Page Template Creation</div>
+    </div>
+  </div>
+
+  <!-- Q12: Define terms -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q12</span>
+      <span class="q-text">Distinguish between a <strong>mockup</strong> and a <strong>wireframe</strong> in the web design process.</span>
+      <span class="q-marks">[4]</span>
+    </div>
+    <div class="answer-lines">
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+    </div>
+  </div>
+
+  <!-- Q13: File naming -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q13</span>
+      <span class="q-text">Evaluate the following filenames and state whether each is <strong>acceptable</strong> or <strong>not acceptable</strong> according to the ISO 9660 naming standard. Give a reason for each.</span>
+      <span class="q-marks">[6]</span>
+    </div>
+    <div style="margin-top:8px;">
+      <div class="tf-row" style="padding-left:0;"><span style="font-family:'DM Mono',monospace; font-size:11px; min-width:200px;">i.&nbsp;&nbsp; About Web Design.html</span><div class="tf-boxes"><div class="tf-box"><div class="box"></div> Acceptable</div><div class="tf-box"><div class="box"></div> Not Acceptable</div></div></div>
+      <div class="tf-row" style="padding-left:0;"><span style="font-family:'DM Mono',monospace; font-size:11px; min-width:200px;">ii.&nbsp; contact_us.html</span><div class="tf-boxes"><div class="tf-box"><div class="box"></div> Acceptable</div><div class="tf-box"><div class="box"></div> Not Acceptable</div></div></div>
+      <div class="tf-row" style="padding-left:0;"><span style="font-family:'DM Mono',monospace; font-size:11px; min-width:200px;">iii. Gallery&Images.html</span><div class="tf-boxes"><div class="tf-box"><div class="box"></div> Acceptable</div><div class="tf-box"><div class="box"></div> Not Acceptable</div></div></div>
+    </div>
+    <div style="margin-top:4px; font-size:11px; color:var(--muted); font-style:italic; padding-left:4px;">Write your reasons below:</div>
+    <div class="answer-lines"><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div></div>
+  </div>
+
+  <!-- Q14: Audience analysis -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q14</span>
+      <span class="q-text">List <strong>four questions</strong> a web designer should ask when analyzing their target audience.</span>
+      <span class="q-marks">[4]</span>
+    </div>
+    <div class="answer-lines">
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+    </div>
+  </div>
+
+  <!-- Q15: Extended response -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q15</span>
+      <span class="q-text">A university wants to build a new website. Describe the information that should be included in a <strong>site specification document</strong> for this project. Include at least <strong>four</strong> key elements in your answer.</span>
+      <span class="q-marks">[4]</span>
+    </div>
+    <div class="answer-lines">
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION D — CHAPTER 4: CSS
+  ══════════════════════════════════════════ -->
+  <div class="section-divider"><span class="section-tag">Section D &nbsp;·&nbsp; Chapter 4: Cascading Style Sheets &nbsp;·&nbsp; [25 marks]</span></div>
+
+  <!-- Q16: Label the rule -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q16</span>
+      <span class="q-text">Study the CSS rule below. Label the parts indicated by the arrows by writing the correct term for each numbered element.</span>
+      <span class="q-marks">[4]</span>
+    </div>
+    <div class="q-code" style="margin-left:0; margin-top:10px;">
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888;">①</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888;">②</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888;">③</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#888;">④</span><br>
+<span class="kw">p</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;<span class="val">color</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;<span class="cm">blue</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; }
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 20px; margin-top:8px;">
+      <div style="display:flex; gap:8px; align-items:baseline; font-size:12px;">① <span class="blank" style="flex:1;"></span></div>
+      <div style="display:flex; gap:8px; align-items:baseline; font-size:12px;">② <span class="blank" style="flex:1;"></span></div>
+      <div style="display:flex; gap:8px; align-items:baseline; font-size:12px;">③ <span class="blank" style="flex:1;"></span></div>
+      <div style="display:flex; gap:8px; align-items:baseline; font-size:12px;">④ <span class="blank" style="flex:1;"></span></div>
+    </div>
+  </div>
+
+  <!-- Q17: 3 methods of CSS -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q17</span>
+      <span class="q-text">There are three methods of combining CSS with HTML. Complete the table below by providing the missing information.</span>
+      <span class="q-marks">[6]</span>
+    </div>
+    <table class="match-table" style="margin-left:0; width:100%; margin-top:8px;">
+      <tr><th>Method</th><th>Where it is written</th><th>Scope of effect</th></tr>
+      <tr><td style="font-weight:600;">External Style Sheet</td><td><div class="ans-line" style="min-width:120px;"></div></td><td><div class="ans-line" style="min-width:120px;"></div></td></tr>
+      <tr><td><div class="ans-line" style="min-width:100px;"></div></td><td>Inside &lt;style&gt; in the &lt;head&gt;</td><td><div class="ans-line" style="min-width:120px;"></div></td></tr>
+      <tr><td><div class="ans-line" style="min-width:100px;"></div></td><td><div class="ans-line" style="min-width:120px;"></div></td><td>Only the single element it is applied to</td></tr>
+    </table>
+  </div>
+
+  <!-- Q18: Inheritance -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q18</span>
+      <span class="q-text">The two CSS code blocks below produce identical visual results. Explain the concept of <strong>inheritance</strong> as demonstrated by Block B, and state why Block B is considered better practice.</span>
+      <span class="q-marks">[4]</span>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin: 8px 0;">
+      <div>
+        <div style="font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); margin-bottom:4px; letter-spacing:1px; text-transform:uppercase;">Block A</div>
+        <div class="q-code" style="margin-left:0;">
+<span class="kw">h1</span> { <span class="val">color</span>: red; }<br>
+<span class="kw">p</span>&nbsp; { <span class="val">color</span>: red; }<br>
+<span class="kw">ul</span> { <span class="val">color</span>: red; }<br>
+<span class="kw">em</span> { <span class="val">color</span>: red; }<br>
+<span class="kw">li</span> { <span class="val">color</span>: red; }
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); margin-bottom:4px; letter-spacing:1px; text-transform:uppercase;">Block B</div>
+        <div class="q-code" style="margin-left:0;">
+<span class="kw">body</span> { <span class="val">color</span>: red; }
+        </div>
+      </div>
+    </div>
+    <div class="answer-lines">
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+    </div>
+  </div>
+
+  <!-- Q19: Selector identification -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q19</span>
+      <span class="q-text">Identify the <strong>type of CSS selector</strong> used in each of the following rules, and briefly explain what each rule does.</span>
+      <span class="q-marks">[6]</span>
+    </div>
+    <div class="sub-questions">
+      <div class="sub-q"><span class="sub-label">i.</span><span class="sub-text"><code>.highlight { background-color: yellow; }</code></span></div>
+      <div class="answer-lines"><div class="ans-line"></div><div class="ans-line"></div></div>
+      <div class="sub-q" style="margin-top:6px;"><span class="sub-label">ii.</span><span class="sub-text"><code>p em { color: blue; }</code></span></div>
+      <div class="answer-lines"><div class="ans-line"></div><div class="ans-line"></div></div>
+      <div class="sub-q" style="margin-top:6px;"><span class="sub-label">iii.</span><span class="sub-text"><code>a:hover { background-color: yellow; }</code></span></div>
+      <div class="answer-lines"><div class="ans-line"></div><div class="ans-line"></div></div>
+    </div>
+  </div>
+
+  <!-- Q20: Extended writing -->
+  <div class="question">
+    <div class="q-head">
+      <span class="q-num">Q20</span>
+      <span class="q-text">Explain the difference between the <strong>&lt;div&gt;</strong> and <strong>&lt;span&gt;</strong> elements in HTML. Write a short CSS rule and show how each element would be used in an HTML document to style content using class selectors.</span>
+      <span class="q-marks">[5]</span>
+    </div>
+    <div class="answer-lines">
+      <div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div><div class="ans-line"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span>Principles of Web Design &nbsp;·&nbsp; Ch. 1–4 End-of-Unit Exam</span>
+    <span>Total: 100 Marks &nbsp;·&nbsp; Time: 2h 30min</span>
+    <span>For official use only</span>
+  </div>
+
+</div><!-- /exam-paper -->
+</body>
+</html>
